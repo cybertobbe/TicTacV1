@@ -1,0 +1,31 @@
+ToDo
+
+Extract method validMove
+
+
+
+CheckWinner
+    name changed to isGameOver
+-------------------------------------------------------------------------------------------------
+
+What symbol won, X or O?
+    A private global String variable that is set with X or O when a winner is found
+
+
+-------------------------------------------------------------------------------------------------
+
+Count up winners points +1 and update label
+-------------------------------------------------------------------------------------------------
+
+OK
+New game button. - ok
+    Start a new game without resetting the score.
+
+-------------------------------------------------------------------------------------------------
+Label to display who won
+Print TicTacToe and who won
+
+-------------------------------------------------------------------------------------------------
+
+
+Tester
