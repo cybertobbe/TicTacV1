@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 public class Setup {
 
 
-      public Label name;
       public TextField nameField;
       public Button setName;
 

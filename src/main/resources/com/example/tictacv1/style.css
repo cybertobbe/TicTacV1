@@ -2,3 +2,9 @@
     -fx-opacity: 1;
 }
 
+.text-field{
+    -fx-min-height: 25px;
+    -fx-min-width: 100px;
+    -fx-font: 12px verdana;
+
+}
