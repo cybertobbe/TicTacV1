@@ -17,8 +17,15 @@
 
     <center>
     <HBox spacing="100">
+        <VBox>
         <Label fx:id="player" style="-fx-font-weight: bold" text="Player: " minWidth="60"/>
+        </VBox>
+        <VBox>
+            <Button fx:id="startGame" text="Start Game" onMouseClicked="#startGame" />
+            <Button fx:id="exit" text="Exit game" onMouseClicked="#exitGame"/>
+            </VBox>
     </HBox>
+
     </center>
 
 
