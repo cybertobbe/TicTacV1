@@ -1,14 +1,21 @@
 package com.example.tictacv1;
 
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
-//New Branch
 
 public class GameController {
 
@@ -31,7 +38,7 @@ public class GameController {
       public Label winner;
       public List<Button> buttons = new ArrayList<>();
       public List<String> buttonsUsed = new ArrayList<>();
-
+      public Button quitToMenu;
 
 
       public GameController() {
@@ -43,13 +50,13 @@ public class GameController {
       }
 
 
-      public void initialize(){
+      public void initialize() {
             //Runs after constructor, which doesn't see fxml files.
             //Initialize runs after FXML is loaded and have access to them.
             buttons = Arrays.asList(one, two, three, four, five, six, seven, eight, nine);
             buttons.forEach(button -> button.setFocusTraversable(false));
             //Set counter to 0
-            playerPoints.setText("Player points " + gameModel.getPlayerPoints());
+            playerPoints.setText(SetupController.playerName +  " " + gameModel.getPlayerPoints());
             moveCounter.setText("Moves: " + gameModel.getTotalMoveCounter());
             computerPoints.setText("Computer points " + gameModel.getComputerPoints());
 
@@ -112,7 +119,7 @@ public class GameController {
             moveCounter.setText("Moves: " + gameModel.getTotalMoveCounter());
 
             //Check winner after player plays
-            if(gameModel.isGameOver(buttonsUsed)) {
+            if (gameModel.isGameOver(buttonsUsed)) {
                   buttons.forEach(button -> button.setDisable(true));
                   updatePoints();
                   showWinner();
@@ -128,13 +135,12 @@ public class GameController {
             moveCounter.setText("Moves: " + gameModel.getTotalMoveCounter());
 
             //Check winner after computer plays
-            if(gameModel.isGameOver(buttonsUsed)) {
+            if (gameModel.isGameOver(buttonsUsed)) {
                   buttons.forEach(button -> button.setDisable(true));
-                  if(gameModel.getWinningLine().contentEquals("XXX")){
+                  if (gameModel.getWinningLine().contentEquals("XXX")) {
                         updatePoints();
                         showWinner();
-                  }
-                  else if(gameModel.getWinningLine().contentEquals("OOO")){
+                  } else if (gameModel.getWinningLine().contentEquals("OOO")) {
                         updatePoints();
                         showWinner();
 
@@ -153,7 +159,7 @@ public class GameController {
             gameModel.setPlayerPoints(0);
             gameModel.setComputerPoints(0);
             moveCounter.setText("Moves: " + gameModel.getTotalMoveCounter());
-            playerPoints.setText("Player points " + gameModel.getPlayerPoints());
+            playerPoints.setText(SetupController.playerName +  " " + gameModel.getPlayerPoints());
             computerPoints.setText("Computer points " + gameModel.getComputerPoints());
             buttonsUsed = Arrays.asList("", "", "", "", "", "", "", "", "");
             winner.setText("");
@@ -168,17 +174,36 @@ public class GameController {
             winner.setText("");
       }
 
-      public void updatePoints(){
-            playerPoints.setText("Player points " + gameModel.getPlayerPoints());
+      public void updatePoints() {
+            playerPoints.setText(SetupController.playerName +  " " + gameModel.getPlayerPoints());
             computerPoints.setText("Computer points " + gameModel.getComputerPoints());
       }
 
-      public void showWinner(){
+      public void showWinner() {
             switch (gameModel.getWinningLine()) {
-                  case "XXX" -> winner.setText("Player wins in " + gameModel.getTotalMoveCounter() + " moves!");
+                  case "XXX" -> winner.setText(SetupController.playerName + " wins in " + gameModel.getTotalMoveCounter() + " moves!");
                   case "OOO" -> winner.setText("Computer wins in " + gameModel.getTotalMoveCounter() + " moves!");
                   case "Draw" -> winner.setText("Draw!");
             }
       }
 
+
+      public void exit(MouseEvent mouseEvent) {
+            try {
+                  // Load the start scene
+                  Parent start = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("setup.fxml")));
+
+                  // Create a new scene with the start scene
+                  Scene startScene = new Scene(start);
+
+                  // Get the current stage
+                  Stage window = (Stage) ((Node)mouseEvent.getSource()).getScene().getWindow();
+
+                  // Set the new scene to the current stage
+                  window.setScene(startScene);
+                  window.show();
+            } catch (IOException e) {
+                  e.printStackTrace();
+            }
+      }
 }
