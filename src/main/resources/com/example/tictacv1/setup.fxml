@@ -3,30 +3,43 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.geometry.Insets?>
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictacv1.SetupController">
+<?import javafx.scene.text.Font?>
+<BorderPane prefHeight="700.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictacv1.SetupController">
+
     <top>
-    <HBox>
-       <TextField fx:id="nameField" promptText="Name" minWidth="200" text="Name: " />
-       <Button fx:id="setName" text="Ok" minWidth="50" onMouseClicked="#setupPLayerNameOnMousePressed" onAction="#setupPLayerNameOnEnter"/>
 
+        <Label text="TicTacToe" BorderPane.alignment="CENTER">
+            <font>
+                <Font size="35"/>
+            </font>
+        </Label>
 
-
-   </HBox>
     </top>
-
     <center>
-    <HBox spacing="100">
-        <VBox>
-        <Label fx:id="player" style="-fx-font-weight: bold" text="Player: " minWidth="60"/>
-        </VBox>
-        <VBox>
-            <Button fx:id="startGame" text="Start Game" onMouseClicked="#startGame" />
-            <Button fx:id="exit" text="Exit game" onMouseClicked="#exitGame"/>
-            </VBox>
-    </HBox>
+    <HBox alignment="CENTER" spacing="20">
+       <TextField fx:id="nameField" minWidth="200" promptText="Name" />
+        <Button fx:id="setName" minWidth="50" onAction="#setupPLayerNameOnEnter" onMouseClicked="#setupPLayerNameOnMousePressed" text="Ok" />
+        <Label fx:id="player" minWidth="60" style="-fx-font-weight: bold" text="Player: " />
+   </HBox>
+
+
+
 
     </center>
 
+
+
+    <bottom>
+
+
+        <HBox BorderPane.alignment="CENTER">
+
+            <Button fx:id="startGame" onMouseClicked="#startGame" text="Start Game" />
+            <Button fx:id="exit" onMouseClicked="#exitGame" text="Exit game" />
+
+        </HBox>
+
+
+    </bottom>
 
 </BorderPane>

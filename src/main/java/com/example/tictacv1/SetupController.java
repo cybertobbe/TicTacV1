@@ -22,7 +22,9 @@ public class SetupController {
       public TextField nameField;
       public Button setName;
       public Label player;
-      static String playerName = "";
+      static String playerName = "Anonymous";
+      public Button exit;
+      public Button startGame;
 
 
       public void setupPLayerNameOnMousePressed(MouseEvent mouseEvent) {
