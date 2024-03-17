@@ -1,21 +1,14 @@
 package com.example.tictacv1;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
-//New Branch
+
 
 public class GameController {
 
@@ -39,7 +32,6 @@ public class GameController {
       public List<Button> buttons = new ArrayList<>();
       public List<String> buttonsUsed = new ArrayList<>();
 
-      private boolean isGameView = true;
 
       public GameController() {
 
@@ -50,7 +42,7 @@ public class GameController {
       }
 
 
-      public void initialize(){
+      public void initialize() {
             //Runs after constructor, which doesn't see fxml files.
             //Initialize runs after FXML is loaded and have access to them.
             buttons = Arrays.asList(one, two, three, four, five, six, seven, eight, nine);
@@ -119,7 +111,7 @@ public class GameController {
             moveCounter.setText("Moves: " + gameModel.getTotalMoveCounter());
 
             //Check winner after player plays
-            if(gameModel.isGameOver(buttonsUsed)) {
+            if (gameModel.isGameOver(buttonsUsed)) {
                   buttons.forEach(button -> button.setDisable(true));
                   updatePoints();
                   showWinner();
@@ -135,13 +127,12 @@ public class GameController {
             moveCounter.setText("Moves: " + gameModel.getTotalMoveCounter());
 
             //Check winner after computer plays
-            if(gameModel.isGameOver(buttonsUsed)) {
+            if (gameModel.isGameOver(buttonsUsed)) {
                   buttons.forEach(button -> button.setDisable(true));
-                  if(gameModel.getWinningLine().contentEquals("XXX")){
+                  if (gameModel.getWinningLine().contentEquals("XXX")) {
                         updatePoints();
                         showWinner();
-                  }
-                  else if(gameModel.getWinningLine().contentEquals("OOO")){
+                  } else if (gameModel.getWinningLine().contentEquals("OOO")) {
                         updatePoints();
                         showWinner();
 
@@ -175,12 +166,12 @@ public class GameController {
             winner.setText("");
       }
 
-      public void updatePoints(){
+      public void updatePoints() {
             playerPoints.setText("Player points " + gameModel.getPlayerPoints());
             computerPoints.setText("Computer points " + gameModel.getComputerPoints());
       }
 
-      public void showWinner(){
+      public void showWinner() {
             switch (gameModel.getWinningLine()) {
                   case "XXX" -> winner.setText("Player wins in " + gameModel.getTotalMoveCounter() + " moves!");
                   case "OOO" -> winner.setText("Computer wins in " + gameModel.getTotalMoveCounter() + " moves!");
