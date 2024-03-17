@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -25,14 +26,18 @@ public class SetupController {
       static String playerName = "Anonymous";
       public Button exit;
       public Button startGame;
+      public CheckBox checkDefault;
+      public CheckBox checkBlack;
 
+
+            public void initialize() {
+                  //Initialize checkboxes in the setup view
+                  checkDefault.setUserData("game-view.fxml");
+                  checkBlack.setUserData("game2-view.fxml");
+            }
 
       public void setupPLayerNameOnMousePressed(MouseEvent mouseEvent) {
-
             setPLayerName();
-//            String name = nameField.getText();
-//            player.setText("Player: " + name);
-
       }
 
 
@@ -49,8 +54,14 @@ public class SetupController {
 
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             Parent root = null;
+            String fxmlFile = null;
+            if (checkDefault.isSelected()){
+                  fxmlFile = (String) checkDefault.getUserData();
+            } else if (checkBlack.isSelected()) {
+                  fxmlFile = (String) checkBlack.getUserData();
+            }
             try {
-                  root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game-view.fxml")));
+                  root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
             } catch (IOException e) {
                   e.printStackTrace();
             }

@@ -38,6 +38,7 @@ public class GameController {
       public Label winner;
       public List<Button> buttons = new ArrayList<>();
       public List<String> buttonsUsed = new ArrayList<>();
+      public Button quitToMenu;
 
 
       public GameController() {
