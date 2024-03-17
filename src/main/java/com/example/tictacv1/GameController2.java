@@ -34,6 +34,7 @@ public class GameController2 extends Application {
       public Label computerPoints;
       public Label moveCounter;
       public Label winner;
+      public Button changeView;
 
 
       @Override
@@ -54,22 +55,8 @@ public class GameController2 extends Application {
 
       }
 
-//      public void changeView(MouseEvent mouseEvent) throws IOException {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("game-view.fxml"));
-//            Parent root = loader.load();
-//            GameController2 secondController = loader.getController();
-//      }
 
 
-      public void changeView(MouseEvent mouseEvent) {
-            try {
-                  Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game-view.fxml")));
-                  Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-                  Scene scene = new Scene(root);
-                  stage.setScene(scene);
-                  stage.show();
-            } catch (IOException e) {
-                  e.printStackTrace();
-            }
-      }
+
+
 }

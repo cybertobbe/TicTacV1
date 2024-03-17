@@ -39,7 +39,7 @@ public class GameController {
       public List<Button> buttons = new ArrayList<>();
       public List<String> buttonsUsed = new ArrayList<>();
 
-
+      private boolean isGameView = true;
 
       public GameController() {
 
@@ -188,15 +188,5 @@ public class GameController {
             }
       }
 
-      public void changeView(MouseEvent mouseEvent) {
-            try {
-                  Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("game2-view.fxml")));
-                  Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
-                  Scene scene = new Scene(root);
-                  stage.setScene(scene);
-                  stage.show();
-            } catch (IOException e) {
-                  e.printStackTrace();
-            }
-      }
+
 }
