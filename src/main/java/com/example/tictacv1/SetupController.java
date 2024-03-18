@@ -34,6 +34,7 @@ public class SetupController {
                   //Initialize checkboxes in the setup view
                   checkDefault.setUserData("game-view.fxml");
                   checkBlack.setUserData("game2-view.fxml");
+                  checkDefault.setSelected(true);
             }
 
       public void setupPLayerNameOnMousePressed(MouseEvent mouseEvent) {
@@ -61,6 +62,7 @@ public class SetupController {
                   fxmlFile = (String) checkBlack.getUserData();
             }
             try {
+
                   root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
             } catch (IOException e) {
                   e.printStackTrace();
