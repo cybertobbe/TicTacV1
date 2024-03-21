@@ -20,22 +20,22 @@
 
             </HBox>
             <HBox alignment="CENTER" spacing="2">
-                <Button fx:id="one" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
-                <Button fx:id="two" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
-                <Button fx:id="three" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="one" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="two" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="three" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
 
             </HBox>
 
             <HBox alignment="CENTER" spacing="2">
-                <Button fx:id="four" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
-                <Button fx:id="five" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
-                <Button fx:id="six" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="four" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="five" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="six" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
             </HBox>
 
             <HBox alignment="CENTER" spacing="2">
-                <Button fx:id="seven" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
-                <Button fx:id="eight" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
-                <Button fx:id="nine" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="seven" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="eight" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
+                <Button fx:id="nine" onMouseClicked="#clicked" prefHeight="200" prefWidth="200" styleClass="game-button" style="-fx-font-size: 50; -fx-text-fill: Blue; -fx-background-color: Black" />
             </HBox>
 
         </VBox>

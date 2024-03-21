@@ -1,5 +1,14 @@
-.button:disabled{
-    -fx-opacity: 1;
+.game-button:disabled{
+   -fx-opacity: 1.0;
+   -fx-background-color: Black;
+   -fx-text-fill: Blue;
+
+
+}
+
+-game-default-button{
+    -fx-opacity: 1.0;
+    -fx-background-color: Black;
 }
 
 .text-field{
