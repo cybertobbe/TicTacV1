@@ -41,6 +41,8 @@ public class SetupController {
 
             }
 
+            //Set player name on mouse click or enter pressed
+
       public void setupPLayerNameOnMousePressed(MouseEvent mouseEvent) {
             setPLayerName();
       }
@@ -50,6 +52,8 @@ public class SetupController {
             setPLayerName();
       }
 
+      //Set player name to anonymous if nothing is entered or if nothing is selected
+      //Else set name to input variable
       public void setPLayerName(){
             playerName = nameField.getText();
             if(nameField.getText().isEmpty()){
