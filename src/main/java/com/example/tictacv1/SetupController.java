@@ -48,7 +48,12 @@ public class SetupController {
 
       public void setPLayerName(){
             playerName = nameField.getText();
-            player.setText("Player: " + playerName);
+            if(nameField.getText().isEmpty()){
+                  playerName = "Anonymous";
+            }
+            else {
+                  player.setText("Player: " + playerName);
+            }
       }
 
       public void startGame(MouseEvent mouseEvent) {
@@ -62,6 +67,7 @@ public class SetupController {
                   fxmlFile = (String) checkBlack.getUserData();
             }
             try {
+
 
                   root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
             } catch (IOException e) {
