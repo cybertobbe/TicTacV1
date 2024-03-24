@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -26,15 +23,22 @@ public class SetupController {
       static String playerName = "Anonymous";
       public Button exit;
       public Button startGame;
-      public CheckBox checkDefault;
-      public CheckBox checkBlack;
+      public RadioButton checkDefault;
+      public RadioButton checkBlack;
 
 
             public void initialize() {
                   //Initialize checkboxes in the setup view
                   checkDefault.setUserData("game-view.fxml");
                   checkBlack.setUserData("game2-view.fxml");
+
+                  //Set togglegroups for default and black
+                  //only one radiobutton can be selected at a time
+                  ToggleGroup group = new ToggleGroup();
+                  checkDefault.setToggleGroup(group);
+                  checkBlack.setToggleGroup(group);
                   checkDefault.setSelected(true);
+
             }
 
       public void setupPLayerNameOnMousePressed(MouseEvent mouseEvent) {
