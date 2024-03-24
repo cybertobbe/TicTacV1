@@ -28,7 +28,7 @@ public class SetupController {
 
 
             public void initialize() {
-                  //Initialize checkboxes in the setup view
+                  //Initialize radiobuttons in the setup view
                   checkDefault.setUserData("game-view.fxml");
                   checkBlack.setUserData("game2-view.fxml");
 
