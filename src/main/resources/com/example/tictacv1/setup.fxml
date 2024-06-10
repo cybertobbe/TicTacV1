@@ -43,7 +43,7 @@
 
             <Button fx:id="startGame" onMouseClicked="#startGame" text="Start Game" />
             <Button fx:id="exit" onMouseClicked="#exitGame" text="Exit game" />
-
+            <RadioButton fx:id="checkAi" text="Start Ai"/>
         </HBox>
 
 

@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -28,13 +25,23 @@ public class SetupController {
       public Button startGame;
       public CheckBox checkDefault;
       public CheckBox checkBlack;
+      public RadioButton checkAi;
+
+
+      private final GameModel gameModel = GameModel.getInstance();
 
 
             public void initialize() {
+                  System.out.println("Setting AI: " + checkAi.isSelected());
                   //Initialize checkboxes in the setup view
                   checkDefault.setUserData("game-view.fxml");
                   checkBlack.setUserData("game2-view.fxml");
                   checkDefault.setSelected(true);
+                  checkAi.setSelected(false);
+                  checkAi.setOnAction(e -> {
+                        gameModel.setAiEnabled(checkAi.isSelected());
+                        System.out.println("AI is enabled: " + checkAi.isSelected());
+                  });
             }
 
       public void setupPLayerNameOnMousePressed(MouseEvent mouseEvent) {
@@ -77,5 +84,6 @@ public class SetupController {
                   Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
                   stage.close();
             }
+
 
 }

@@ -19,7 +19,7 @@ import java.util.Objects;
 
 public class GameController {
 
-      private final GameModel gameModel = new GameModel();
+      private final GameModel gameModel = GameModel.getInstance();
       //FXML connections
       public Button one;
       public Button two;
@@ -65,7 +65,7 @@ public class GameController {
       }
 
 
-      //PLayer plays
+      //Player plays
       public void clicked(MouseEvent mouseEvent) {
 
             int buttonClicked = 0;

@@ -7,14 +7,16 @@ import java.util.Random;
 public class GameModel {
 
 
+      private boolean isAiEnabled;
       Random random = new Random();
       private int totalMoveCounter;
       private String winningLine = "";
       private int playerPoints;
       private int computerPoints;
+      private static GameModel instance;
 
       public GameModel() {
-
+            System.out.println("New GameModel instance created");
             totalMoveCounter = 0;
 
       }
@@ -25,10 +27,25 @@ public class GameModel {
 
       }
 
+      public static GameModel getInstance() {
+            if (instance == null) {
+                  instance = new GameModel();
+            }
+            return instance;
+      }
 
 
+      public void setAiEnabled(boolean aiEnabled) {
+            this.isAiEnabled = aiEnabled;
+            System.out.println("AI is enabled: " + isAiEnabled);
+      }
+
+      public boolean getAiEnabled() {
+            return isAiEnabled;
+      }
 
       public void playerClick(int buttonClicked, List<String> buttonsUsed) {
+            System.out.println(isAiEnabled);
             //This method is called from GameController when a button is clicked
             buttonsUsed.set(buttonClicked-1, "X");
             setTotalMoveCounter(getTotalMoveCounter() + 1);
@@ -38,12 +55,34 @@ public class GameModel {
 
       public int computerPlay(List<String> buttonsUsed, int buttonClicked) {
 
-            buttonClicked = validMove(buttonsUsed, random);
-            //Computer sets in String arrayList to indicate that the button is used
-            buttonsUsed.set(buttonClicked, "O");
+            if(isAiEnabled){
+                  int bestScore = Integer.MIN_VALUE;
+                  int move = -1;
+                  for (int i = 0; i < buttonsUsed.size(); i++) {
+                        if (!buttonsUsed.get(i).equals("X") && !buttonsUsed.get(i).equals("O")) {
+                              buttonsUsed.set(i, "O");
+                              int score = minimax(buttonsUsed, false);
+                              buttonsUsed.set(i, "");
+                              if (score > bestScore) {
+                                    bestScore = score;
+                                    move = i;
+                              }
+                        }
+                  }
+                  buttonsUsed.set(move, "O");
+                  setTotalMoveCounter(getTotalMoveCounter() + 1);
+                  return move;
+            }
 
-            setTotalMoveCounter(getTotalMoveCounter() + 1);
+            else {
 
+                  buttonClicked = validMove(buttonsUsed, random);
+                  //Computer sets in String arrayList to indicate that the button is used
+                  buttonsUsed.set(buttonClicked, "O");
+
+                  setTotalMoveCounter(getTotalMoveCounter() + 1);
+
+            }
 
             return buttonClicked;
 
@@ -121,4 +160,45 @@ public class GameModel {
       public String getWinningLine() {
             return winningLine;
       }
+
+      public int minimax(List<String> buttonsUsed, boolean isComputer) {
+            if (isGameOver(buttonsUsed)) {
+                  return evaluate(buttonsUsed);
+            }
+
+            if (isComputer) {
+                  int maxScore = Integer.MIN_VALUE;
+                  for (int i = 0; i < buttonsUsed.size(); i++) {
+                        if (!buttonsUsed.get(i).equals("X") && !buttonsUsed.get(i).equals("O")) {
+                              buttonsUsed.set(i, "O");
+                              int score = minimax(buttonsUsed, false);
+                              buttonsUsed.set(i, "");
+                              maxScore = Math.max(maxScore, score);
+                        }
+                  }
+                  return maxScore;
+            } else {
+                  int minScore = Integer.MAX_VALUE;
+                  for (int i = 0; i < buttonsUsed.size(); i++) {
+                        if (!buttonsUsed.get(i).equals("X") && !buttonsUsed.get(i).equals("O")) {
+                              buttonsUsed.set(i, "X");
+                              int score = minimax(buttonsUsed, true);
+                              buttonsUsed.set(i, "");
+                              minScore = Math.min(minScore, score);
+                        }
+                  }
+                  return minScore;
+            }
+      }
+
+      public int evaluate(List<String> buttonsUsed) {
+            if (winningLine.equals("OOO")) {
+                  return 1;
+            } else if (winningLine.equals("XXX")) {
+                  return -1;
+            } else {
+                  return 0;
+            }
+      }
+
 }
