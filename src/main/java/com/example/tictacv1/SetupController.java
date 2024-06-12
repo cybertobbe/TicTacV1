@@ -37,7 +37,6 @@ public class SetupController {
                   checkDefault.setUserData("game-view.fxml");
                   checkBlack.setUserData("game2-view.fxml");
                   checkDefault.setSelected(true);
-                  checkAi.setSelected(false);
                   checkAi.setOnAction(e -> {
                         gameModel.setAiEnabled(checkAi.isSelected());
                         System.out.println("AI is enabled: " + checkAi.isSelected());
@@ -70,7 +69,8 @@ public class SetupController {
             }
             try {
 
-                  root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
+                assert fxmlFile != null;
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
             } catch (IOException e) {
                   e.printStackTrace();
             }

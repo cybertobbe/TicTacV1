@@ -36,8 +36,10 @@ public class GameModel {
 
 
       public void setAiEnabled(boolean aiEnabled) {
-            this.isAiEnabled = aiEnabled;
+            if(this.isAiEnabled != aiEnabled)
+                  this.isAiEnabled = aiEnabled;
             System.out.println("AI is enabled: " + isAiEnabled);
+            //Thread.dumpStack();
       }
 
       public boolean getAiEnabled() {
