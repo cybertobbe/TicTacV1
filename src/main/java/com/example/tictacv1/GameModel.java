@@ -56,24 +56,12 @@ public class GameModel {
       public int computerPlay(List<String> buttonsUsed, int buttonClicked) {
 
             if(isAiEnabled){
-                  int bestScore = Integer.MIN_VALUE;
-                  int move = -1;
-                  for (int i = 0; i < buttonsUsed.size(); i++) {
-                        if (!buttonsUsed.get(i).equals("X") && !buttonsUsed.get(i).equals("O")) {
-                              buttonsUsed.set(i, "O");
-                              int score = minimax(buttonsUsed, false);
-                              buttonsUsed.set(i, "");
-                              if (score > bestScore) {
-                                    bestScore = score;
-                                    move = i;
-                              }
-                        }
-                  }
-                  buttonsUsed.set(move, "O");
-                  setTotalMoveCounter(getTotalMoveCounter() + 1);
-                  return move;
-            }
+                    AiModel aiModel = new AiModel(this);
+                    buttonClicked = aiModel.findBestMove(buttonsUsed);
+                    buttonsUsed.set(buttonClicked, "O");
+                    setTotalMoveCounter(getTotalMoveCounter() + 1);
 
+            }
             else {
 
                   buttonClicked = validMove(buttonsUsed, random);
@@ -83,8 +71,8 @@ public class GameModel {
                   setTotalMoveCounter(getTotalMoveCounter() + 1);
 
             }
-
             return buttonClicked;
+
 
       }
       //Extracted method from computerPlay to check if the button is used
@@ -139,8 +127,6 @@ public class GameModel {
             this.totalMoveCounter = totalMoveCounter;
       }
 
-
-
       public int getPlayerPoints() {
             return playerPoints;
       }
@@ -161,44 +147,6 @@ public class GameModel {
             return winningLine;
       }
 
-      public int minimax(List<String> buttonsUsed, boolean isComputer) {
-            if (isGameOver(buttonsUsed)) {
-                  return evaluate(buttonsUsed);
-            }
 
-            if (isComputer) {
-                  int maxScore = Integer.MIN_VALUE;
-                  for (int i = 0; i < buttonsUsed.size(); i++) {
-                        if (!buttonsUsed.get(i).equals("X") && !buttonsUsed.get(i).equals("O")) {
-                              buttonsUsed.set(i, "O");
-                              int score = minimax(buttonsUsed, false);
-                              buttonsUsed.set(i, "");
-                              maxScore = Math.max(maxScore, score);
-                        }
-                  }
-                  return maxScore;
-            } else {
-                  int minScore = Integer.MAX_VALUE;
-                  for (int i = 0; i < buttonsUsed.size(); i++) {
-                        if (!buttonsUsed.get(i).equals("X") && !buttonsUsed.get(i).equals("O")) {
-                              buttonsUsed.set(i, "X");
-                              int score = minimax(buttonsUsed, true);
-                              buttonsUsed.set(i, "");
-                              minScore = Math.min(minScore, score);
-                        }
-                  }
-                  return minScore;
-            }
-      }
-
-      public int evaluate(List<String> buttonsUsed) {
-            if (winningLine.equals("OOO")) {
-                  return 1;
-            } else if (winningLine.equals("XXX")) {
-                  return -1;
-            } else {
-                  return 0;
-            }
-      }
 
 }
