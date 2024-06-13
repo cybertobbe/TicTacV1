@@ -37,6 +37,9 @@ public class AiModel {
                 // Check if spot is available
                 if (!buttonsUsed.get(i).equals("X") && !buttonsUsed.get(i).equals("O")) {
                     buttonsUsed.set(i, "X");
+                    int score = minimax(buttonsUsed, depth + 1, true);
+                    buttonsUsed.set(i, "");
+                    bestScore = Math.min(score, bestScore);
 
                 }
             }
