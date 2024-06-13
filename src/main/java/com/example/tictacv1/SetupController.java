@@ -76,7 +76,6 @@ public class SetupController {
                 assert fxmlFile != null;
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
             } catch (IOException e) {
-                  //e.printStackTrace();
                   logger.error("Error: ", e);
             }
             stage.setScene(new Scene(root, 642, 700));

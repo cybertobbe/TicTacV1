@@ -212,7 +212,6 @@ public class GameController {
                   window.setScene(startScene);
                   window.show();
             } catch (IOException e) {
-                  //e.printStackTrace();
                   logger.error("Error: ", e);
             }
       }
