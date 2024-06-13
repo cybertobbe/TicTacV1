@@ -142,19 +142,13 @@ public class GameController {
             if (gameModel.isGameOver(buttonsUsed)) {
                   buttons.forEach(button -> button.setDisable(true));
                   if (gameModel.getWinningLine().contentEquals("XXX")) {
-                      gameModel.setPlayerPoints(gameModel.getPlayerPoints() + 1);
                         updatePoints();
                         showWinner();
                   } else if (gameModel.getWinningLine().contentEquals("OOO")) {
-                        gameModel.setComputerPoints(gameModel.getComputerPoints() + 1);
-
                         updatePoints();
                         showWinner();
 
                   }
-                  //updatePoints();
-                  //showWinner();
-
 
             }
 
