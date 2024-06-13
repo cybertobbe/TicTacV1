@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ import java.util.Objects;
 
 
 public class GameController {
+
+      private static final Logger logger = LogManager.getLogger(GameController.class);
 
       private final GameModel gameModel = GameModel.getInstance();
       //FXML connections
@@ -208,7 +212,8 @@ public class GameController {
                   window.setScene(startScene);
                   window.show();
             } catch (IOException e) {
-                  e.printStackTrace();
+                  //e.printStackTrace();
+                  logger.error("Error: ", e);
             }
       }
 }

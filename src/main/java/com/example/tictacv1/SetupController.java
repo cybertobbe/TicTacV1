@@ -10,12 +10,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class SetupController {
 
+
+      private static final Logger logger = LogManager.getLogger(SetupController.class);
 
       public TextField nameField;
       public Button setName;
@@ -72,7 +76,8 @@ public class SetupController {
                 assert fxmlFile != null;
                 root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
             } catch (IOException e) {
-                  e.printStackTrace();
+                  //e.printStackTrace();
+                  logger.error("Error: ", e);
             }
             stage.setScene(new Scene(root, 642, 700));
             stage.show();
