@@ -71,7 +71,6 @@ public class GameController {
 
       //Player plays
       public void clicked(MouseEvent mouseEvent) {
-
             int buttonClicked = 0;
             if (mouseEvent.getSource() == one) {
                   one.setText("X");
@@ -131,10 +130,14 @@ public class GameController {
             }
 
             //Computer plays
-            buttonClicked = gameModel.computerPlay(buttonsUsed, buttonClicked);
-            buttons.set(buttonClicked, buttons.get(buttonClicked));
-            buttons.get(buttonClicked).setText("O");
-            buttons.get(buttonClicked).setDisable(true);
+            try {
+                  buttonClicked = gameModel.computerPlay(buttonsUsed, buttonClicked);
+                  buttons.set(buttonClicked, buttons.get(buttonClicked));
+                  buttons.get(buttonClicked).setText("O");
+                  buttons.get(buttonClicked).setDisable(true);
+            } catch (Exception e) {
+                  logger.error("Error: ", e);
+            }
 
             moveCounter.setText("Moves: " + gameModel.getTotalMoveCounter());
 

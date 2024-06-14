@@ -59,14 +59,20 @@ public class GameModel {
       }
 
 
-      public int computerPlay(List<String> buttonsUsed, int buttonClicked) {
+      public int computerPlay(List<String> buttonsUsed, int buttonClicked) throws Exception{
 
             if(isAiEnabled){
-                    AiModel aiModel = new AiModel(this);
-                    buttonClicked = aiModel.findBestMove(buttonsUsed);
-                    buttonsUsed.set(buttonClicked, "O");
-                    setTotalMoveCounter(getTotalMoveCounter() + 1);
+                  AiModel aiModel = new AiModel(this);
+                    int bestMove = aiModel.findBestMove(buttonsUsed);
 
+                  if (bestMove >=0 && bestMove < buttonsUsed.size()) {
+                              buttonClicked = bestMove;
+                              buttonsUsed.set(buttonClicked, "O");
+                              setTotalMoveCounter(getTotalMoveCounter() + 1);
+                  }else{
+                        throw new Exception("No best move found");
+
+                  }
             }
             else {
 

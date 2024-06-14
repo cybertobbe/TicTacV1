@@ -1,9 +1,13 @@
 package com.example.tictacv1;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.List;
 
 public class AiModel {
     private final GameModel gameModel;
+    private static final Logger logger = LogManager.getLogger(AiModel.class);
 
     public AiModel(GameModel gameModel) {
         this.gameModel = gameModel;
@@ -28,6 +32,7 @@ public class AiModel {
                     int score = minimax(buttonsUsed, depth + 1, false);
                     buttonsUsed.set(i, "");
                     bestScore = Math.max(score, bestScore);
+                    logger.info("Best score: {}", bestScore);
                 }
             }
             return bestScore;
@@ -39,6 +44,7 @@ public class AiModel {
                     buttonsUsed.set(i, "X");
                     int score = minimax(buttonsUsed, depth + 1, true);
                     buttonsUsed.set(i, "");
+
                     bestScore = Math.min(score, bestScore);
 
                 }
