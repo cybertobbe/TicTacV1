@@ -61,7 +61,7 @@ public class SetupController {
             player.setText("Player: " + playerName);
       }
 
-      public void startGame(MouseEvent mouseEvent) {
+      public void handleStartGame(MouseEvent mouseEvent) {
 
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             Parent root = null;

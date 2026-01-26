@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Random;
 
+
+
 public class GameModel {
 
       private static final Logger logger = LogManager.getLogger(GameModel.class);
