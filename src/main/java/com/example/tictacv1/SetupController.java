@@ -7,18 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Objects;
 
 public class SetupController {
 
+
+      private static final Logger logger = LogManager.getLogger(SetupController.class);
 
       public TextField nameField;
       public Button setName;
@@ -28,13 +29,22 @@ public class SetupController {
       public Button startGame;
       public CheckBox checkDefault;
       public CheckBox checkBlack;
+      public RadioButton checkAi;
+
+
+      private final GameModel gameModel = GameModel.getInstance();
 
 
             public void initialize() {
+                  System.out.println("Setting AI: " + checkAi.isSelected());
                   //Initialize checkboxes in the setup view
                   checkDefault.setUserData("game-view.fxml");
                   checkBlack.setUserData("game2-view.fxml");
                   checkDefault.setSelected(true);
+                  checkAi.setOnAction(e -> {
+                        gameModel.setAiEnabled(checkAi.isSelected());
+                        System.out.println("AI is enabled: " + checkAi.isSelected());
+                  });
             }
 
       public void setupPLayerNameOnMousePressed(MouseEvent mouseEvent) {
@@ -51,7 +61,7 @@ public class SetupController {
             player.setText("Player: " + playerName);
       }
 
-      public void startGame(MouseEvent mouseEvent) {
+      public void handleStartGame(MouseEvent mouseEvent) {
 
             Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
             Parent root = null;
@@ -63,9 +73,10 @@ public class SetupController {
             }
             try {
 
-                  root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
+                assert fxmlFile != null;
+                root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
             } catch (IOException e) {
-                  e.printStackTrace();
+                  logger.error("Error: ", e);
             }
             stage.setScene(new Scene(root, 642, 700));
             stage.show();
@@ -77,5 +88,6 @@ public class SetupController {
                   Stage stage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
                   stage.close();
             }
+
 
 }

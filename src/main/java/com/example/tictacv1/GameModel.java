@@ -1,20 +1,28 @@
 package com.example.tictacv1;
 
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.List;
 import java.util.Random;
 
+
+
 public class GameModel {
 
+      private static final Logger logger = LogManager.getLogger(GameModel.class);
 
+      private boolean isAiEnabled;
       Random random = new Random();
       private int totalMoveCounter;
       private String winningLine = "";
       private int playerPoints;
       private int computerPoints;
+      private static GameModel instance;
 
       public GameModel() {
-
+            System.out.println("New GameModel instance created");
             totalMoveCounter = 0;
 
       }
@@ -25,10 +33,27 @@ public class GameModel {
 
       }
 
+      public static GameModel getInstance() {
+            if (instance == null) {
+                  instance = new GameModel();
+            }
+            return instance;
+      }
 
 
+      public void setAiEnabled(boolean aiEnabled) {
+            if(this.isAiEnabled != aiEnabled)
+                  this.isAiEnabled = aiEnabled;
+            System.out.println("AI is enabled: " + isAiEnabled);
+            //Thread.dumpStack();
+      }
+
+      public boolean getAiEnabled() {
+            return isAiEnabled;
+      }
 
       public void playerClick(int buttonClicked, List<String> buttonsUsed) {
+            System.out.println(isAiEnabled);
             //This method is called from GameController when a button is clicked
             buttonsUsed.set(buttonClicked-1, "X");
             setTotalMoveCounter(getTotalMoveCounter() + 1);
@@ -36,16 +61,32 @@ public class GameModel {
       }
 
 
-      public int computerPlay(List<String> buttonsUsed, int buttonClicked) {
+      public int computerPlay(List<String> buttonsUsed, int buttonClicked) throws Exception{
 
-            buttonClicked = validMove(buttonsUsed, random);
-            //Computer sets in String arrayList to indicate that the button is used
-            buttonsUsed.set(buttonClicked, "O");
+            if(isAiEnabled){
+                  AiModel aiModel = new AiModel(this);
+                    int bestMove = aiModel.findBestMove(buttonsUsed);
 
-            setTotalMoveCounter(getTotalMoveCounter() + 1);
+                  if (bestMove >=0 && bestMove < buttonsUsed.size()) {
+                              buttonClicked = bestMove;
+                              buttonsUsed.set(buttonClicked, "O");
+                              setTotalMoveCounter(getTotalMoveCounter() + 1);
+                  }else{
+                        throw new Exception("No best move found");
 
+                  }
+            }
+            else {
 
+                  buttonClicked = validMove(buttonsUsed, random);
+                  //Computer sets in String arrayList to indicate that the button is used
+                  buttonsUsed.set(buttonClicked, "O");
+
+                  setTotalMoveCounter(getTotalMoveCounter() + 1);
+
+            }
             return buttonClicked;
+
 
       }
       //Extracted method from computerPlay to check if the button is used
@@ -100,8 +141,6 @@ public class GameModel {
             this.totalMoveCounter = totalMoveCounter;
       }
 
-
-
       public int getPlayerPoints() {
             return playerPoints;
       }
@@ -121,4 +160,7 @@ public class GameModel {
       public String getWinningLine() {
             return winningLine;
       }
+
+
+
 }

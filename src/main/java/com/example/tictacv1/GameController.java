@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +21,9 @@ import java.util.Objects;
 
 public class GameController {
 
-      private final GameModel gameModel = new GameModel();
+      private static final Logger logger = LogManager.getLogger(GameController.class);
+
+      private final GameModel gameModel = GameModel.getInstance();
       //FXML connections
       public Button one;
       public Button two;
@@ -65,9 +69,8 @@ public class GameController {
       }
 
 
-      //PLayer plays
+      //Player plays
       public void clicked(MouseEvent mouseEvent) {
-
             int buttonClicked = 0;
             if (mouseEvent.getSource() == one) {
                   one.setText("X");
@@ -127,10 +130,14 @@ public class GameController {
             }
 
             //Computer plays
-            buttonClicked = gameModel.computerPlay(buttonsUsed, buttonClicked);
-            buttons.set(buttonClicked, buttons.get(buttonClicked));
-            buttons.get(buttonClicked).setText("O");
-            buttons.get(buttonClicked).setDisable(true);
+            try {
+                  buttonClicked = gameModel.computerPlay(buttonsUsed, buttonClicked);
+                  buttons.set(buttonClicked, buttons.get(buttonClicked));
+                  buttons.get(buttonClicked).setText("O");
+                  buttons.get(buttonClicked).setDisable(true);
+            } catch (Exception e) {
+                  logger.error("Error: ", e);
+            }
 
             moveCounter.setText("Moves: " + gameModel.getTotalMoveCounter());
 
@@ -145,7 +152,6 @@ public class GameController {
                         showWinner();
 
                   }
-
 
             }
 
@@ -203,7 +209,7 @@ public class GameController {
                   window.setScene(startScene);
                   window.show();
             } catch (IOException e) {
-                  e.printStackTrace();
+                  logger.error("Error: ", e);
             }
       }
 }
