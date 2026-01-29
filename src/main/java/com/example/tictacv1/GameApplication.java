@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class GameApplication extends Application {
 
-      private static final Logger logger = LogManager.getLogger(GameApplication.class);
+      private static final Logger logger = LogManager.getLogger(GameApplication.class.getName());
 
       GameController controller = new GameController();
       @Override
